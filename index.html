@@ -6,102 +6,100 @@
   <title>StudyFlip - Learn Smarter</title>
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body {
-      min-height:100vh;
-      display:flex;
+    body { scroll-behavior: smooth; }
+    section { min-height:100vh; display:flex; justify-content:center; align-items:center; padding:60px 20px; position:relative; }
+    .hero {
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      color:white; text-align:center;
       flex-direction:column;
-      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-      color:white;
     }
-    header {
-      padding: 60px 20px 40px;
-      text-align:center;
-    }
-    header h1 {
-      font-size:3em;
-      margin-bottom:10px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
-    }
-    header p {
-      font-size:1.3em;
-      opacity:0.9;
-    }
-    main {
-      flex:1;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-    }
+    .hero h1 { font-size:3em; margin-bottom:20px; text-shadow: 2px 2px 6px rgba(0,0,0,0.3); animation: fadeUp 1s ease-out; }
+    .hero p { font-size:1.3em; margin-bottom:40px; opacity:0.9; animation: fadeUp 1.3s ease-out; }
+    .btn { background: linear-gradient(135deg,#ff6a00 0%,#ee0979 100%); color:white; border:none; padding:15px 40px; font-size:1.1em; font-weight:600; border-radius:10px; cursor:pointer; text-decoration:none; transition: transform 0.2s, box-shadow 0.2s; animation: fadeUp 1.6s ease-out; display:inline-block; }
+    .btn:hover { transform: translateY(-3px); box-shadow:0 10px 20px rgba(102,126,234,0.4); }
+
+    @keyframes fadeUp { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+
+    .section-light { background:#f9f9f9; color:#333; flex-direction:column; }
+    .section-dark { background:#667eea; color:white; flex-direction:column; }
+
+    .cards-container { display:flex; gap:30px; flex-wrap:wrap; justify-content:center; opacity:0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .cards-container.visible { opacity:1; transform: translateY(0); }
+
     .card {
-      background: white;
-      color:#333;
-      border-radius:20px;
-      padding:40px;
-      max-width:600px;
-      text-align:center;
-      box-shadow:0 20px 60px rgba(0,0,0,0.25);
-      transition: transform 0.3s, box-shadow 0.3s;
+      background:white; color:#333; border-radius:20px; padding:30px; max-width:250px; text-align:center;
+      box-shadow:0 15px 40px rgba(0,0,0,0.15); transition: transform 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 25px 70px rgba(0,0,0,0.3);
-    }
-    .card h2 {
-      font-size:2em;
-      margin-bottom:20px;
-      color:#667eea;
-    }
-    .card p {
-      font-size:1.1em;
-      margin-bottom:30px;
-      line-height:1.5;
-    }
-    .btn {
-      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-      color:white;
-      border:none;
-      padding:15px 40px;
-      font-size:1.1em;
-      font-weight:600;
-      border-radius:10px;
-      cursor:pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-decoration:none;
-      display:inline-block;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow:0 10px 20px rgba(102,126,234,0.4);
-    }
-    footer {
-      text-align:center;
-      padding:20px;
-      font-size:0.9em;
-      opacity:0.7;
-    }
-    @media (max-width:768px) {
-      header h1 { font-size:2.2em; }
-      .card { padding:30px; }
-    }
+    .card:hover { transform: translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,0.2); }
+
+    .section-light h2, .section-dark h2 { font-size:2em; margin-bottom:20px; text-align:center; }
+    .section-light p, .section-dark p { font-size:1.1em; margin-bottom:40px; text-align:center; line-height:1.5; max-width:700px; }
+
+    footer { text-align:center; padding:20px; font-size:0.9em; opacity:0.7; background:#333; color:white; }
+
+    @media(max-width:768px){ .card { max-width:90%; } .hero h1 { font-size:2em; } }
   </style>
 </head>
 <body>
-  <header>
-    <h1>StudyFlip</h1>
-    <p>Turn your notes into interactive flashcards & learn smarter!</p>
-  </header>
 
-  <main>
-    <div class="card">
-      <h2>Get Started</h2>
-      <p>Create flashcards on any topic in seconds. Study anywhere, flip the cards, and track your progress. Perfect for exams, language learning, or just brushing up on knowledge.</p>
-      <a href="flashcards.html" class="btn">Generate Flashcards</a>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>StudyFlip</h1>
+    <p>Transform your notes into interactive flashcards. Learn faster, remember longer.</p>
+    <a href="flashcards.html" class="btn">Get Started</a>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section-light">
+    <h2>Why StudyFlip?</h2>
+    <p>StudyFlip helps you turn any topic into flashcards instantly. Keep track of progress, shuffle cards, and focus on the concepts that matter most.</p>
+    <div class="cards-container" id="features">
+      <div class="card">✅ Quick Flashcard Generation</div>
+      <div class="card">🎯 Focused Learning</div>
+      <div class="card">📊 Track Your Progress</div>
+      <div class="card">🌐 Study Anywhere</div>
     </div>
-  </main>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section-dark">
+    <h2>How It Works</h2>
+    <p>1️⃣ Enter your topic or notes.<br>
+       2️⃣ Choose the number of flashcards and difficulty.<br>
+       3️⃣ Generate your personalized study set.<br>
+       4️⃣ Flip, shuffle, and learn efficiently.</p>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="section-light">
+    <h2>Benefits of Using StudyFlip</h2>
+    <div class="cards-container" id="benefits">
+      <div class="card">🧠 Improve Memory Retention</div>
+      <div class="card">⏱ Save Study Time</div>
+      <div class="card">💡 Learn Smarter, Not Harder</div>
+      <div class="card">📱 Access Anywhere</div>
+    </div>
+  </section>
 
   <footer>
-    &copy; 2025 StudyFlip. Made for smarter studying.
+    &copy; 2025 StudyFlip. Make studying fun and effective.
   </footer>
+
+  <script>
+    // Simple scroll-trigger for fade-in cards
+    function handleScroll() {
+      const elements = document.querySelectorAll('.cards-container');
+      const triggerBottom = window.innerHeight * 0.85;
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if(rect.top < triggerBottom){
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('load', handleScroll);
+  </script>
+
 </body>
 </html>
