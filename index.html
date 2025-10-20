@@ -366,7 +366,16 @@
                 }
 
                 const data = await response.json();
-                const content = data.choices[0].message.content.trim();
+                let content = "";
+                if (data.choices?.[0]?.message?.content) {
+                    content = data.choices[0].message.content.trim();
+                } 
+                else if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    content = data.candidates[0].content.parts[0].text.trim();
+                }
+                else {
+                    throw new Error("Unexpected API response format");
+                }
                 
                 // Parse JSON from the response
                 const jsonMatch = content.match(/\[[\s\S]*\]/);
